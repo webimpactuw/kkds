@@ -28,10 +28,10 @@ body {
 
 .navbar-links {
   display: flex;
-  gap: 20px; /* This puts space between your links */
+  gap: 20px; 
   list-style: none;
 }
 
 .navbar-links a:hover {
-  color: #ff968a;            /* Optional: Change the text color too (blue) */
+  color: #ff968a;           
 }
