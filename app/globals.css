@@ -18,20 +18,4 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background: #ffd1dc;
-  border-bottom: 1px solid #ddd;
-}
 
-.navbar-links {
-  display: flex;
-  gap: 20px; 
-  list-style: none;
-}
-
-.navbar-links a:hover {
-  color: #ff968a;           
-}
