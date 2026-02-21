@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Button from "../components/Button"
+import Button from "../components/Button";
+import Dropdown from "../components/Dropdown";
 
 export default function Home() {
   return (
@@ -80,6 +81,40 @@ export default function Home() {
         <div>
           <Button>Enroll Now</Button>
         </div>
+      </div>
+
+      {/* FAQ */}
+      <div className="flex px-[89.5px] py-32 bg-[#FFFAEE] gap-20">
+        
+        {/* Left Side: Title */}
+        <div className="w-1/3">
+          <h2 className="text-[64px] font-bold leading-[1.1]">
+            Frequently <br /> 
+            Asked <br /> 
+            <span className="text-[#830033]">Questions</span>
+          </h2>
+        </div>
+
+        {/* Right Side: Accordion List */}
+        <div className="w-2/3">
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
+          />
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Detailed answer about classes, schedule, or dress code goes here." 
+          />
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Another detailed answer for your students." 
+          />
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Final question example." 
+          />
+        </div>
+
       </div>
     </div>
   );
