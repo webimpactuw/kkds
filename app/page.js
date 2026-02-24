@@ -89,7 +89,7 @@ export default function Home() {
       {/* FAQ */}
       <div className="flex px-[89.5px] py-32 bg-[#FFFAEE] gap-20">
         
-        {/* Left Side: Title */}
+        {/* Left Side: FAQ Title */}
         <div className="w-1/3">
           <h2 className="text-[64px] font-bold leading-[1.1]">
             Frequently <br /> 
@@ -98,7 +98,7 @@ export default function Home() {
           </h2>
         </div>
 
-        {/* Right Side: Accordion List */}
+        {/* Right Side: Actual Q&A */}
         <div className="w-2/3">
           <Dropdown 
             question="Lorem ipsum dolor sit amet?" 

@@ -10,10 +10,10 @@ export default function Dropdown({ question, answer }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between items-center w-full text-left"
       >
-        <span className={`text-[24px] font-semibold transition-colors ${isOpen ? 'text-[#830033]' : 'text-black'}`}>
+        <span className={`text-[24px] font-semibold hover:text-[#830033] transition-colors ${isOpen ? 'text-[#830033]' : 'text-black'}`}>
           {question}
         </span>
-        {/* Simple Icon */}
+        {/* Simple ⌄ (arrow) Icon */}
         <span className={`text-2xl transition-transform duration-300 ${isOpen ? 'rotate-180 text-[#830033]' : ''}`}>
           ⌄
         </span>
