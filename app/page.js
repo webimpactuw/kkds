@@ -7,6 +7,9 @@ export default function Home() {
     <div className="bg-[#FFFAEE]  text-black font-normal">
       {/* landing page */}
       <div className="pl-[89.5px] h-236.25 bg-[linear-gradient(270deg,#FFFFFF_22.69%,rgba(255,201,67,0.9)_100%)]">
+        <div>
+          {/* image placeholder */}
+        </div>
         <div className="absolute w-193.75 h-fit top-70.5">
           <h1 className="text-[#830033] h-37 font-[Oleo_Script_Swash_Caps] font-bold text-[96px] tracking-[5px] m-0 pb-0">Kalamandapam</h1>
           <h2 className="h-17.5 text-[48px] m-0 pt-0">Kuchipudi Dance School</h2>
@@ -31,12 +34,12 @@ export default function Home() {
       </div>
 
       {/* classes offered */}
-      <div className="h-279.25 bg-[#FFE299] p-20 g-2.5 text-center">
-        <div className="w-319.75 g-[80px]">
+      <div className="flex-col h-279.25 bg-[#FFE299] p-20 gap-2.5 items-center text-center">
+        <div className="w-319.75 gap-20">
           <div className="h-17.5 mb-10">
             <h2 className="text-[64px] font-bold">Classes Offered</h2>
           </div>
-          <div className="flex justify-between h-159.75">
+          <div className="flex justify-between h-159.75 items-center">
             <div className="w-84.25">
               <div className="h-82.25 bg-white rounded-t-[10px]"></div>
               <div className="p-2.5 gap-2.5 h-14.75 bg-[#830033]">
