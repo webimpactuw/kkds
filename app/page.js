@@ -4,13 +4,29 @@ import Dropdown from "../components/Dropdown";
 
 export default function Home() {
   return (
-    <div className="bg-[#FFFAEE]  text-black font-normal">
+    <section className="bg-[#FFFAEE]  text-black font-normal">
       {/* landing page */}
-      <div className="pl-[89.5px] h-236.25 bg-[linear-gradient(270deg,#FFFFFF_22.69%,rgba(255,201,67,0.9)_100%)]">
-        <div>
-          {/* image placeholder */}
+      <section className="flex flex-col min-h-screen md:flex-row items-center justify-between bg-[linear-gradient(270deg,#FFFFFF_22.69%,rgba(255,201,67,0.9)_100%)] p-10">
+
+        {/* left: text content */}
+        <div className="w-full md:w-1/2 text-center md:text-left md:pr-10 md:ml-20">
+          <h1 className="text-[#830033] font-[Oleo_Script_Swash_Caps] font-bold text-[96px] mb-1">Kalamandapam</h1>
+          <h2 className="text-[48px] mb-4">Kuchipudi Dance School</h2>
+
+          <p className="text-[32px] leading-relaxed mb-8">Discover the vibrant world of Kuchipudi dance at our studio in Sammamish, Washington.</p>
+          <Button>Learn More</Button>
         </div>
-        <div className="absolute w-193.75 h-fit top-70.5">
+
+        {/* right: dancer image */}
+        <div className="h-full md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0 w-[50vh]">
+          <img
+            src = "/landingImage.png"
+            alt = "kuchipudi dancer image"
+            className = "h-full object-contain"
+          ></img>
+        </div>
+
+        {/* <div className="absolute w-193.75 h-fit top-70.5">
           <h1 className="text-[#830033] h-37 font-[Oleo_Script_Swash_Caps] font-bold text-[96px] tracking-[5px] m-0 pb-0">Kalamandapam</h1>
           <h2 className="h-17.5 text-[48px] m-0 pt-0">Kuchipudi Dance School</h2>
         </div>
@@ -19,8 +35,8 @@ export default function Home() {
         </div>
         <div className="absolute top-153.25">
           <Button>Learn More</Button>
-        </div>
-      </div>
+        </div> */}
+      </section>
 
       {/* message */}
       <div className="flex justify-center items-center p-10 gap-2.5 mx-auto">
@@ -119,6 +135,6 @@ export default function Home() {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 }
