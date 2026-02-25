@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function Button({children}) {
+export default function Button({text, link}) {
     return (
-        <button className="bg-[#830033] text-white font-bold text-[20px] leading-none rounded-[10px] w-50 h-16 pt-1.25 pb-1.25 pr-12.5 pl-12.5 gap-2.5">
-            {children}
-        </button>
+        <Link 
+            href={link}
+            className="flex items-center justify-center bg-[#830033] text-white font-bold text-[24px] rounded-[15px] w-fit h-18.75 px-12.5 py-1.25 transition-transform duration-200 hover:scale-105"
+        >
+            {text}
+        </Link>
     )
 }
