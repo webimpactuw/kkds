@@ -1,21 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
+import Button from "../components/Button"
+import Dropdown from "../components/Dropdown";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-[#FFFAEE]  text-black font-normal">
+      {/* landing page */}
+      <div className="pl-[89.5px] h-236.25 bg-[linear-gradient(270deg,#FFFFFF_22.69%,rgba(255,201,67,0.9)_100%)]">
+        <div>
+          {/* image placeholder */}
+        </div>
+        <div className="absolute w-193.75 h-fit top-70.5">
+          <h1 className="text-[#830033] h-37 font-[Oleo_Script_Swash_Caps] font-bold text-[96px] tracking-[5px] m-0 pb-0">Kalamandapam</h1>
+          <h2 className="h-17.5 text-[48px] m-0 pt-0">Kuchipudi Dance School</h2>
+        </div>
+        <div className="absolute w-156.25 h-19.5 top-126.25">
+          <p className="text-[32px] tracking-[0.5px]">Discover the vibrant world of Kuchipudi dance at our studio in Sammamish, Washington.</p>
+        </div>
+        <div className="absolute top-153.25">
+          <Button>Learn More</Button>
+        </div>
+      </div>
 
-      <section className="py-16 bg-[#E8CF8E]">
-        <div className="max-w-6xl mx-auto px-6">
+      {/* message */}
+      <div className="flex justify-center items-center p-10 gap-2.5 mx-auto">
+        <p className="text-center text-[32px] leading-12">
+          At Kalamandapam, we believe in the power of dance to inspire, educate, and connect people. Our experienced
+          instructors are passionate about sharing their knowledge and expertise, ensuring that each student
+          recieves personalized attention to develop their skills, grace, and confidence. Through a blend of traditional
+          techniques and modern teaching methods, we create a dyanmic learning experience that celebrate the heritage of Kuchipudi
+          while encouraging individual expression.
+        </p>
+      </div>
 
-          <h2 className="text-4xl font-bold text-center mb-12">
+      {/* classes offered */}
+      <div>
+
+      <section className="py-16 bg-[#FFE299]">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
+
+          {/* Title */}
+          <h2 className="text-[64px] font-bold mb-12">
             Classes Offered
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Class Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
 
-            <div className="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-              <div className="relative h-56">
+            {/* Beginner */}
+            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+              <div className="relative h-82.25">
                 <Image
                   src="/placeholder.jpg"
                   alt="Beginner Class"
@@ -23,16 +58,37 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="bg-[#8B002E] text-white text-center py-3 font-semibold text-lg">
-                Beginner
+              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
+                <p className="text-[32px] font-bold text-white">Beginner</p>
               </div>
-              <div className="p-6 text-gray-700 text-center">
-                Introductory classes focused on fundamentals, technique, and building strong basics.
+              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-              <div className="relative h-56">
+            {/* Intermediate */}
+            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+              <div className="relative h-82.25">
+                <Image
+                  src="/placeholder.jpg"
+                  alt="Intermediate Class"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
+                <p className="text-[32px] font-bold text-white">Intermediate</p>
+              </div>
+              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </div>
+            </div>
+
+            {/* Advanced */}
+            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+              <div className="relative h-82.25">
                 <Image
                   src="/placeholder.jpg"
                   alt="Advanced Class"
@@ -40,37 +96,22 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="bg-[#8B002E] text-white text-center py-3 font-semibold text-lg">
-                Advanced
+              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
+                <p className="text-[32px] font-bold text-white">Advanced</p>
               </div>
-              <div className="p-6 text-gray-700 text-center">
-                High-level training designed for experienced students refining technique and performance.
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-              <div className="relative h-56">
-                <Image
-                  src="/placeholder.jpg"
-                  alt="Intermediate Class"
-                  fill
-                  className="object-cover" as
-                />
-              </div>
-              <div className="bg-[#8B002E] text-white text-center py-3 font-semibold text-lg">
-                Intermediate
-              </div>
-              <div className="p-6 text-gray-700 text-center">
-                Classes bridging foundational skills and advanced techniques.
+              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
 
           </div>
 
-          <div className="text-center mt-12">
+          {/* Enroll Button */}
+          <div className="mt-12">
             <Link
               href="/classes"
-              className="inline-block bg-[#8B002E] text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-900 transition"
+              className="inline-block bg-[#830033] text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-900 transition"
             >
               Enroll Now
             </Link>
@@ -78,6 +119,42 @@ export default function Home() {
 
         </div>
       </section>
+
+    </div>
+
+      {/* FAQ */}
+      <div className="flex px-[89.5px] py-32 bg-[#FFFAEE] gap-20">
+        
+        {/* Left Side: FAQ Title */}
+        <div className="w-1/3">
+          <h2 className="text-[64px] font-bold leading-[1.1]">
+            Frequently <br /> 
+            Asked <br /> 
+            <span className="text-[#830033]">Questions</span>
+          </h2>
+        </div>
+
+        {/* Right Side: Actual Q&A */}
+        <div className="w-2/3">
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
+          />
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Detailed answer about classes, schedule, or dress code goes here." 
+          />
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Another detailed answer for your students." 
+          />
+          <Dropdown 
+            question="Lorem ipsum dolor sit amet?" 
+            answer="Final question example." 
+          />
+        </div>
+
+      </div>
     </div>
   );
 }
