@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Button from "../components/Button"
 import Dropdown from "../components/Dropdown";
 
@@ -50,57 +51,92 @@ export default function Home() {
       </div>
 
       {/* classes offered */}
-      <div className="flex-col h-279.25 bg-[#FFE299] p-20 gap-2.5 items-center text-center">
-        <div className="w-319.75 gap-20">
-          <div className="h-17.5 mb-10">
-            <h2 className="text-[64px] font-bold">Classes Offered</h2>
-          </div>
-          <div className="flex justify-between h-159.75 items-center">
-            <div className="w-84.25">
-              <div className="h-82.25 bg-white rounded-t-[10px]"></div>
-              <div className="p-2.5 gap-2.5 h-14.75 bg-[#830033]">
+      <div>
+
+      <section className="py-16 bg-[#FFE299]">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
+
+          {/* Title */}
+          <h2 className="text-[64px] font-bold mb-12">
+            Classes Offered
+          </h2>
+
+          {/* Class Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
+
+            {/* Beginner */}
+            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+              <div className="relative h-82.25">
+                <Image
+                  src="/placeholder.jpg"
+                  alt="Beginner Class"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
                 <p className="text-[32px] font-bold text-white">Beginner</p>
               </div>
-              <div className="bg-[#FFFAEE] p-6 g-2.5 rounded-b-[10px] h-62.75">
-                <p className="text-[20px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
-                  consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem 
-                  ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
+              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
 
-            <div className="w-84.25">
-              <div className="h-82.25 bg-white rounded-t-[10px]"></div>
-              <div className="p-2.5 gap-2.5 h-14.75 bg-[#830033]">
+            {/* Intermediate */}
+            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+              <div className="relative h-82.25">
+                <Image
+                  src="/placeholder.jpg"
+                  alt="Intermediate Class"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
                 <p className="text-[32px] font-bold text-white">Intermediate</p>
               </div>
-              <div className="bg-[#FFFAEE] p-6 g-2.5 rounded-b-[10px] h-62.75">
-                <p className="text-[20px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
-                  consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem 
-                  ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
+              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
 
-            <div className="w-84.25">
-              <div className="h-82.25 bg-white rounded-t-[10px]"></div>
-              <div className="p-2.5 gap-2.5 h-14.75 bg-[#830033]">
+            {/* Advanced */}
+            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
+              <div className="relative h-82.25">
+                <Image
+                  src="/placeholder.jpg"
+                  alt="Advanced Class"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
                 <p className="text-[32px] font-bold text-white">Advanced</p>
               </div>
-              <div className="bg-[#FFFAEE] p-6 g-2.5 rounded-b-[10px] h-62.75">
-                <p className="text-[20px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
-                  consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem 
-                  ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
+              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </div>
             </div>
-          </div>
-        </div>
 
-        <div>
-          <Button>Enroll Now</Button>
+          </div>
+
+          {/* Enroll Button */}
+          <div className="mt-12">
+            <Link
+              href="/classes"
+              className="inline-block bg-[#830033] text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-900 transition"
+            >
+              Enroll Now
+            </Link>
+          </div>
+
         </div>
-      </div>
+      </section>
+
+    </div>
 
       {/* FAQ */}
       <div className="flex px-[89.5px] py-32 bg-[#FFFAEE] gap-20">
