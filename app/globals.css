@@ -5,6 +5,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Design tokens from Figma (Colors + Fonts) */
+  --color-primary: #830033;
+  --color-accent: #FFE299;
+  --color-surface: #FFFAEE;
+  --color-button: #a10041;
 }
 
 
