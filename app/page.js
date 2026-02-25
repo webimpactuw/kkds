@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button"
 import Dropdown from "../components/Dropdown";
+import Header from "../components/Header";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
           <h2 className="text-[48px] mb-4">Kuchipudi Dance School</h2>
 
           <p className="text-[32px] leading-relaxed mb-8">Discover the vibrant world of Kuchipudi dance at our studio in Sammamish, Washington.</p>
-          <Button>Learn More</Button>
+          <Button text="Learn More" link="/about">Learn More</Button>
         </div>
 
         {/* right: dancer image */}
@@ -26,21 +27,10 @@ export default function Home() {
             className = "h-full object-contain"
           ></img>
         </div>
-
-        {/* <div className="absolute w-193.75 h-fit top-70.5">
-          <h1 className="text-[#830033] h-37 font-[Oleo_Script_Swash_Caps] font-bold text-[96px] tracking-[5px] m-0 pb-0">Kalamandapam</h1>
-          <h2 className="h-17.5 text-[48px] m-0 pt-0">Kuchipudi Dance School</h2>
-        </div>
-        <div className="absolute w-156.25 h-19.5 top-126.25">
-          <p className="text-[32px] tracking-[0.5px]">Discover the vibrant world of Kuchipudi dance at our studio in Sammamish, Washington.</p>
-        </div>
-        <div className="absolute top-153.25">
-          <Button>Learn More</Button>
-        </div> */}
       </section>
 
       {/* message */}
-      <div className="flex justify-center items-center p-10 gap-2.5 mx-auto">
+      <div className="flex h-107 justify-center items-center p-10 gap-2.5 mx-auto">
         <p className="text-center text-[32px] leading-12">
           At Kalamandapam, we believe in the power of dance to inspire, educate, and connect people. Our experienced
           instructors are passionate about sharing their knowledge and expertise, ensuring that each student
@@ -51,15 +41,13 @@ export default function Home() {
       </div>
 
       {/* classes offered */}
-      <div>
-
       <section className="py-16 bg-[#FFE299]">
         <div className="max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
 
           {/* Title */}
-          <h2 className="text-[64px] font-bold mb-12">
-            Classes Offered
-          </h2>
+          <div className="mb-12">
+            <Header>Classes Offered</Header>
+          </div>
 
           {/* Class Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
@@ -125,18 +113,90 @@ export default function Home() {
 
           {/* Enroll Button */}
           <div className="mt-12">
-            <Link
-              href="/classes"
-              className="inline-block bg-[#830033] text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-900 transition"
-            >
-              Enroll Now
-            </Link>
+            <Button text="Enroll Now" link="/classes">Enroll Now</Button>
           </div>
 
         </div>
       </section>
 
-    </div>
+      {/* upcoming events */}
+      <section className="flex flex-col bg-[#FFFAEE] items-center justify-center py-20">
+        {/* page content */}
+        <div className="mb-22.25">
+              <Header>Upcoming Events</Header>
+        </div>
+
+        {/* event photos: placeholders */}
+        <div className="flex items-center justify-center gap-13">
+            <div className="w-159.25 h-149.25 bg-white"></div>
+
+            <div className="flex-col w-120.25 items-start">
+              <div className="h-71.5 bg-white mb-6.25"></div>
+              <div className="h-71.5 bg-white"></div>
+            </div>
+        </div>
+
+        {/* view all button */}
+        <div className="flex justify-center mt-22.25">
+          <Button text="View All" link="/events">View All</Button>
+        </div>
+      </section>
+
+      {/* get in touch */}
+      <section className="flex md:flex-row justify-between items-center py-31 px-16 bg-[#FFE299] gap-16">
+        {/* left: title and content */}
+        <div className="flex flex-col w-full gap-9">
+          <h2 className="text-[64px] font-bold font-[Rambla] text-left">Get In Touch</h2>
+
+          <form className="space-y-9">
+            {/* Name */}
+            <div>
+              <input 
+                type="text" 
+                placeholder="Name" 
+                className="w-full border border-[#AAAAAA] bg-white text-[32px] font-bold px-4 py-2" 
+              />
+            </div>
+            
+
+            {/* Email */}
+            <div>
+              <input 
+                type="email" 
+                placeholder="Email" 
+                className="w-full border border-[#AAAAAA] bg-white text-[32px] font-bold px-4 py-2"
+              />
+            </div>
+            
+
+            {/* Message */}
+            <div>
+              <textarea 
+                placeholder="Message" 
+                rows="5" 
+                className="w-full border border-[#AAAAAA] bg-white text-[32px] font-bold px-4 py-2 resize-none"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <button 
+              type="submit" 
+              className="inline-block w-full h-18.75 bg-[#830033] text-white font-bold text-[24px] rounded-xl px-12.5 py-1.25 text-center transition-transform duration-200 hover:scale-105"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+
+        {/* location image */}
+        <img
+            src = "/locationMap.png"
+            alt = "kkds map location"
+            className = "w-136.25 h-175"
+        ></img>
+
+      </section>
+
 
       {/* FAQ */}
       <div className="flex px-[89.5px] py-32 bg-[#FFFAEE] gap-20">
