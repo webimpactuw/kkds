@@ -1,236 +1,289 @@
-import Image from "next/image";
-import Link from "next/link";
-import Button from "../components/Button"
-import Dropdown from "../components/Dropdown";
-import Header from "../components/Header";
+import Image from 'next/image'
+import Button from '../components/Button'
+import Dropdown from '../components/Dropdown'
+import Header from '../components/Header'
+import { sanityFetch } from '../sanity/lib/live'
+import { urlFor } from '../sanity/lib/image'
+import {
+  CLASSES_QUERY,
+  FAQS_QUERY,
+  FEATURED_EVENTS_QUERY,
+  SITE_SETTINGS_QUERY,
+} from '../sanity/lib/queries'
 
-export default function Home() {
+export default async function Home() {
+  const [
+    { data: settings },
+    { data: classes },
+    { data: faqs },
+    { data: events },
+  ] = await Promise.all([
+    sanityFetch({ query: SITE_SETTINGS_QUERY }),
+    sanityFetch({ query: CLASSES_QUERY }),
+    sanityFetch({ query: FAQS_QUERY }),
+    sanityFetch({ query: FEATURED_EVENTS_QUERY }),
+  ])
+
+  const heroTitle = settings?.heroTitle || 'Kalamandapam'
+  const heroSubtitle = settings?.heroSubtitle || 'Kuchipudi Dance School'
+  const heroDescription =
+    settings?.heroDescription ||
+    'Discover the vibrant world of Kuchipudi dance at our studio in Sammamish, Washington.'
+  const heroImageSrc = settings?.heroImage
+    ? urlFor(settings.heroImage).width(900).fit('max').url()
+    : '/landingImage.png'
+  const mission =
+    settings?.missionStatement ||
+    'At Kalamandapam, we believe in the power of dance to inspire, educate, and connect people. Our experienced instructors are passionate about sharing their knowledge and expertise, ensuring that each student recieves personalized attention to develop their skills, grace, and confidence. Through a blend of traditional techniques and modern teaching methods, we create a dyanmic learning experience that celebrate the heritage of Kuchipudi while encouraging individual expression.'
+  const mapImageSrc = settings?.mapImage
+    ? urlFor(settings.mapImage).width(1100).fit('max').url()
+    : '/locationMap.png'
+
+  const classList = classes?.length ? classes : DEFAULT_CLASSES
+  const faqList = faqs?.length ? faqs : DEFAULT_FAQS
+  const eventList = events?.length ? events : null
+
   return (
-    <section className="bg-[#FFFAEE]  text-black font-normal">
+    <section className="bg-[#FFFAEE] text-black font-normal">
       {/* landing page */}
-      <section className="flex flex-col min-h-screen md:flex-row items-center justify-between bg-[linear-gradient(270deg,#FFFFFF_22.69%,rgba(255,201,67,0.9)_100%)] p-10">
-
-        {/* left: text content */}
-        <div className="w-full md:w-1/2 text-center md:text-left md:pr-10 md:ml-20">
-          <h1 className="text-[#830033] font-[Oleo_Script_Swash_Caps] font-bold text-[96px] mb-1">Kalamandapam</h1>
-          <h2 className="text-[48px] mb-4">Kuchipudi Dance School</h2>
-
-          <p className="text-[32px] leading-relaxed mb-8">Discover the vibrant world of Kuchipudi dance at our studio in Sammamish, Washington.</p>
-          <Button text="Learn More" link="/about">Learn More</Button>
+      <section className="flex min-h-screen flex-col items-center justify-between bg-[linear-gradient(270deg,#FFFFFF_22.69%,rgba(255,201,67,0.9)_100%)] p-10 md:flex-row">
+        <div className="w-full md:ml-20 md:w-1/2 md:pr-10 text-center md:text-left">
+          <h1 className="text-[#830033] font-[Oleo_Script_Swash_Caps] font-bold text-[96px] mb-1">
+            {heroTitle}
+          </h1>
+          <h2 className="text-[48px] mb-4">{heroSubtitle}</h2>
+          <p className="text-[32px] leading-relaxed mb-8">{heroDescription}</p>
+          <Button text="Learn More" link="/about" />
         </div>
 
-        {/* right: dancer image */}
-        <div className="h-full md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0 w-[50vh]">
+        <div className="mt-8 flex h-full w-[50vh] justify-center md:mt-0 md:w-1/2 md:justify-end">
           <img
-            src = "/landingImage.png"
-            alt = "kuchipudi dancer image"
-            className = "h-full object-contain"
-          ></img>
+            src={heroImageSrc}
+            alt="Kuchipudi dancer"
+            className="h-full object-contain"
+          />
         </div>
       </section>
 
-      {/* message */}
-      <div className="flex h-107 justify-center items-center p-10 gap-2.5 mx-auto">
-        <p className="text-center text-[32px] leading-12">
-          At Kalamandapam, we believe in the power of dance to inspire, educate, and connect people. Our experienced
-          instructors are passionate about sharing their knowledge and expertise, ensuring that each student
-          recieves personalized attention to develop their skills, grace, and confidence. Through a blend of traditional
-          techniques and modern teaching methods, we create a dyanmic learning experience that celebrate the heritage of Kuchipudi
-          while encouraging individual expression.
-        </p>
+      {/* mission statement */}
+      <div className="mx-auto flex h-107 items-center justify-center gap-2.5 p-10">
+        <p className="text-center text-[32px] leading-12">{mission}</p>
       </div>
 
       {/* classes offered */}
-      <section className="py-16 bg-[#FFE299]">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center text-center">
-
-          {/* Title */}
+      <section className="bg-[#FFE299] py-16">
+        <div className="mx-auto flex max-w-6xl flex-col items-center px-6 text-center">
           <div className="mb-12">
             <Header>Classes Offered</Header>
           </div>
 
-          {/* Class Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
-
-            {/* Beginner */}
-            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
-              <div className="relative h-82.25">
-                <Image
-                  src="/placeholder.jpg"
-                  alt="Beginner Class"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
-                <p className="text-[32px] font-bold text-white">Beginner</p>
-              </div>
-              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
-
-            {/* Intermediate */}
-            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
-              <div className="relative h-82.25">
-                <Image
-                  src="/placeholder.jpg"
-                  alt="Intermediate Class"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
-                <p className="text-[32px] font-bold text-white">Intermediate</p>
-              </div>
-              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
-
-            {/* Advanced */}
-            <div className="bg-white rounded-t-[10px] shadow-md overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col">
-              <div className="relative h-82.25">
-                <Image
-                  src="/placeholder.jpg"
-                  alt="Advanced Class"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-2.5 h-14.75 bg-[#830033] flex items-center justify-center">
-                <p className="text-[32px] font-bold text-white">Advanced</p>
-              </div>
-              <div className="bg-[#FFFAEE] p-6 rounded-b-[10px] h-62.75 text-[20px] text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
-
+          <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-3">
+            {classList.slice(0, 3).map((c) => (
+              <ClassCard key={c._id || c.title} item={c} />
+            ))}
           </div>
 
-          {/* Enroll Button */}
           <div className="mt-12">
-            <Button text="Enroll Now" link="/classes">Enroll Now</Button>
+            <Button text="Enroll Now" link="/classes" />
           </div>
-
         </div>
       </section>
 
       {/* upcoming events */}
-      <section className="flex flex-col bg-[#FFFAEE] items-center justify-center py-20">
-        {/* page content */}
+      <section className="flex flex-col items-center justify-center bg-[#FFFAEE] py-20">
         <div className="mb-22.25">
-              <Header>Upcoming Events</Header>
+          <Header>Upcoming Events</Header>
         </div>
 
-        {/* event photos: placeholders */}
-        <div className="flex items-center justify-center gap-13">
-            <div className="w-159.25 h-149.25 bg-white"></div>
-
-            <div className="flex-col w-120.25 items-start">
-              <div className="h-71.5 bg-white mb-6.25"></div>
-              <div className="h-71.5 bg-white"></div>
-            </div>
+        <div className="flex w-full max-w-6xl flex-col items-center justify-center gap-13 px-6 md:flex-row">
+          {eventList ? (
+            <EventsCollage events={eventList} />
+          ) : (
+            <>
+              {/* placeholder layout shown until events are added in Sanity */}
+              <div className="h-149.25 w-159.25 rounded-md bg-white" />
+              <div className="flex w-120.25 flex-col items-start gap-6.25">
+                <div className="h-71.5 rounded-md bg-white" />
+                <div className="h-71.5 rounded-md bg-white" />
+              </div>
+            </>
+          )}
         </div>
 
-        {/* view all button */}
-        <div className="flex justify-center mt-22.25">
-          <Button text="View All" link="/events">View All</Button>
+        <div className="mt-22.25 flex justify-center">
+          <Button text="View All" link="/events" />
         </div>
       </section>
 
       {/* get in touch */}
-      <section className="flex md:flex-row justify-between items-center py-31 px-16 bg-[#FFE299] gap-16">
-        {/* left: title and content */}
-        <div className="flex flex-col w-full gap-9">
-          <h2 className="text-[64px] font-bold font-[Rambla] text-left">Get In Touch</h2>
+      <section className="flex justify-between gap-16 bg-[#FFE299] px-16 py-31 md:flex-row items-center">
+        <div className="flex w-full flex-col gap-9">
+          <h2 className="text-left font-[Rambla] text-[64px] font-bold">Get In Touch</h2>
 
           <form className="space-y-9">
-            {/* Name */}
-            <div>
-              <input 
-                type="text" 
-                placeholder="Name" 
-                className="w-full border border-[#AAAAAA] bg-white text-[32px] font-bold px-4 py-2" 
-              />
-            </div>
-            
-
-            {/* Email */}
-            <div>
-              <input 
-                type="email" 
-                placeholder="Email" 
-                className="w-full border border-[#AAAAAA] bg-white text-[32px] font-bold px-4 py-2"
-              />
-            </div>
-            
-
-            {/* Message */}
-            <div>
-              <textarea 
-                placeholder="Message" 
-                rows="5" 
-                className="w-full border border-[#AAAAAA] bg-white text-[32px] font-bold px-4 py-2 resize-none"
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button 
-              type="submit" 
-              className="inline-block w-full h-18.75 bg-[#830033] text-white font-bold text-[24px] rounded-xl px-12.5 py-1.25 text-center transition-transform duration-200 hover:scale-105"
+            <input
+              type="text"
+              placeholder="Name"
+              className="w-full border border-[#AAAAAA] bg-white px-4 py-2 text-[32px] font-bold"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full border border-[#AAAAAA] bg-white px-4 py-2 text-[32px] font-bold"
+            />
+            <textarea
+              placeholder="Message"
+              rows="5"
+              className="w-full resize-none border border-[#AAAAAA] bg-white px-4 py-2 text-[32px] font-bold"
+            />
+            <button
+              type="submit"
+              className="inline-block h-18.75 w-full rounded-xl bg-[#830033] px-12.5 py-1.25 text-center text-[24px] font-bold text-white transition-transform duration-200 hover:scale-105"
             >
               Send
             </button>
           </form>
         </div>
 
-        {/* location image */}
         <img
-            src = "/locationMap.png"
-            alt = "kkds map location"
-            className = "w-136.25 h-175"
-        ></img>
-
+          src={mapImageSrc}
+          alt="KKDS studio location map"
+          className="h-175 w-136.25 object-contain"
+        />
       </section>
 
-
       {/* FAQ */}
-      <div className="flex px-[89.5px] py-32 bg-[#FFFAEE] gap-20">
-        
-        {/* Left Side: FAQ Title */}
+      <div className="flex gap-20 bg-[#FFFAEE] px-[89.5px] py-32">
         <div className="w-1/3">
           <h2 className="text-[64px] font-bold leading-[1.1]">
-            Frequently <br /> 
-            Asked <br /> 
+            Frequently <br />
+            Asked <br />
             <span className="text-[#830033]">Questions</span>
           </h2>
         </div>
 
-        {/* Right Side: Actual Q&A */}
         <div className="w-2/3">
-          <Dropdown 
-            question="Lorem ipsum dolor sit amet?" 
-            answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
-          />
-          <Dropdown 
-            question="Lorem ipsum dolor sit amet?" 
-            answer="Detailed answer about classes, schedule, or dress code goes here." 
-          />
-          <Dropdown 
-            question="Lorem ipsum dolor sit amet?" 
-            answer="Another detailed answer for your students." 
-          />
-          <Dropdown 
-            question="Lorem ipsum dolor sit amet?" 
-            answer="Final question example." 
-          />
+          {faqList.map((f) => (
+            <Dropdown
+              key={f._id || f.question}
+              question={f.question}
+              answer={f.answer}
+            />
+          ))}
         </div>
-
       </div>
     </section>
-  );
+  )
 }
+
+function ClassCard({ item }) {
+  const imgSrc = item.image
+    ? urlFor(item.image).width(800).height(660).fit('crop').url()
+    : '/placeholder.jpg'
+  const altText = item.image?.alt || `${item.title} class`
+  return (
+    <div className="flex transform flex-col overflow-hidden rounded-t-[10px] bg-white shadow-md transition duration-300 hover:scale-105">
+      <div className="relative h-82.25">
+        <Image src={imgSrc} alt={altText} fill className="object-cover" />
+      </div>
+      <div className="flex h-14.75 items-center justify-center bg-[#830033] p-2.5">
+        <p className="text-[32px] font-bold text-white">{item.title}</p>
+      </div>
+      <div className="h-62.75 rounded-b-[10px] bg-[#FFFAEE] p-6 text-[20px] text-gray-700">
+        {item.shortDescription || item.description || ''}
+      </div>
+    </div>
+  )
+}
+
+function EventsCollage({ events }) {
+  // Mirrors the Figma layout: one large feature on the left,
+  // up to two smaller stacked tiles on the right.
+  const [feature, ...rest] = events
+  const sideEvents = rest.slice(0, 2)
+  return (
+    <>
+      <EventTile event={feature} className="h-149.25 w-159.25" />
+      <div className="flex w-120.25 flex-col items-start gap-6.25">
+        {sideEvents.map((e) => (
+          <EventTile key={e._id} event={e} className="h-71.5 w-full" />
+        ))}
+      </div>
+    </>
+  )
+}
+
+function EventTile({ event, className }) {
+  const imgSrc = event?.image
+    ? urlFor(event.image).width(1200).fit('max').url()
+    : null
+  return (
+    <div className={`relative overflow-hidden rounded-md bg-white ${className}`}>
+      {imgSrc && (
+        <Image
+          src={imgSrc}
+          alt={event.image?.alt || event.title}
+          fill
+          className="object-cover"
+        />
+      )}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+        <p className="text-lg font-bold text-white">{event.title}</p>
+        {event.date && (
+          <p className="text-sm text-white/90">
+            {new Date(event.date).toLocaleDateString(undefined, {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            })}
+          </p>
+        )}
+      </div>
+    </div>
+  )
+}
+
+const DEFAULT_CLASSES = [
+  {
+    _id: 'default-beginner',
+    title: 'Beginner',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    _id: 'default-intermediate',
+    title: 'Intermediate',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    _id: 'default-advanced',
+    title: 'Advanced',
+    shortDescription:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+]
+
+const DEFAULT_FAQS = [
+  {
+    _id: 'default-faq-1',
+    question: 'Lorem ipsum dolor sit amet?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    _id: 'default-faq-2',
+    question: 'Lorem ipsum dolor sit amet?',
+    answer: 'Detailed answer about classes, schedule, or dress code goes here.',
+  },
+  {
+    _id: 'default-faq-3',
+    question: 'Lorem ipsum dolor sit amet?',
+    answer: 'Another detailed answer for your students.',
+  },
+  {
+    _id: 'default-faq-4',
+    question: 'Lorem ipsum dolor sit amet?',
+    answer: 'Final question example.',
+  },
+]

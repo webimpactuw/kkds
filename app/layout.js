@@ -3,6 +3,7 @@ import { Rambla } from "next/font/google";
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { SanityLive } from '../sanity/lib/live';
 import "./globals.css";
 
 // Geist fonts removed in favor of Rambla + Oleo Script Swash Caps
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
         <Navbar/>
         <main>{children}</main>
         <Footer/>
+        <SanityLive />
       </body>
     </html>
   );
