@@ -1,0 +1,36 @@
+import { PageBanner } from "@/components/ui/PageBanner";
+import {
+  SushmasMessage,
+  TeachingAssistants,
+  YouthInstructors,
+} from "@/components/sections";
+import { getInstructors } from "@/lib/data";
+
+export const metadata = {
+  title: "About Us",
+  description:
+    "Meet the founder, youth instructors, and teaching assistants of Kalamandapam Kuchipudi Dance School in Sammamish, Washington.",
+};
+
+export default async function AboutPage() {
+  const instructors = await getInstructors();
+
+  const founder = instructors.find((i) => i.role === "founder");
+  const youthInstructors = instructors
+    .filter((i) => i.role === "youth")
+    .sort((a, b) => a.order - b.order);
+  const assistants = instructors
+    .filter((i) => i.role === "assistant")
+    .sort((a, b) => a.order - b.order);
+
+  return (
+    <>
+      <PageBanner title="About Us" />
+      {founder && <SushmasMessage founder={founder} />}
+      {youthInstructors.length > 0 && (
+        <YouthInstructors instructors={youthInstructors} />
+      )}
+      {assistants.length > 0 && <TeachingAssistants assistants={assistants} />}
+    </>
+  );
+}
