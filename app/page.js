@@ -2,8 +2,10 @@ import Image from 'next/image'
 import Button from '../components/Button'
 import Dropdown from '../components/Dropdown'
 import Header from '../components/Header'
+import EmailForm from '../components/EmailForm'
 import { sanityFetch } from '../sanity/lib/live'
 import { urlFor } from '../sanity/lib/image'
+
 import {
   CLASSES_QUERY,
   FAQS_QUERY,
@@ -120,29 +122,7 @@ export default async function Home() {
         <div className="flex w-full flex-col gap-9">
           <h2 className="text-left font-[Rambla] text-[64px] font-bold">Get In Touch</h2>
 
-          <form className="space-y-9">
-            <input
-              type="text"
-              placeholder="Name"
-              className="w-full border border-[#AAAAAA] bg-white px-4 py-2 text-[32px] font-bold"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border border-[#AAAAAA] bg-white px-4 py-2 text-[32px] font-bold"
-            />
-            <textarea
-              placeholder="Message"
-              rows="5"
-              className="w-full resize-none border border-[#AAAAAA] bg-white px-4 py-2 text-[32px] font-bold"
-            />
-            <button
-              type="submit"
-              className="inline-block h-18.75 w-full rounded-xl bg-[#830033] px-12.5 py-1.25 text-center text-[24px] font-bold text-white transition-transform duration-200 hover:scale-105"
-            >
-              Send
-            </button>
-          </form>
+          <EmailForm />
         </div>
 
         <img
