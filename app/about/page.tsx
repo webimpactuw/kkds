@@ -1,19 +1,23 @@
 import { PageBanner } from "@/components/ui/PageBanner";
 import {
+  AboutIntro,
   SushmasMessage,
   TeachingAssistants,
   YouthInstructors,
 } from "@/components/sections";
-import { getInstructors } from "@/lib/data";
+import { getAboutPage, getInstructors } from "@/lib/data";
 
 export const metadata = {
   title: "About Us",
   description:
-    "Meet the founder, youth instructors, and teaching assistants of Kalamandapam Kuchipudi Dance School in Sammamish, Washington.",
+    "Meet the founder, youth instructors, and teaching assistants of Kalamandapam Kuchipudi Dance School in Redmond, Washington.",
 };
 
 export default async function AboutPage() {
-  const instructors = await getInstructors();
+  const [about, instructors] = await Promise.all([
+    getAboutPage(),
+    getInstructors(),
+  ]);
 
   const founder = instructors.find((i) => i.role === "founder");
   const youthInstructors = instructors
@@ -26,6 +30,7 @@ export default async function AboutPage() {
   return (
     <>
       <PageBanner title="About Us" />
+      <AboutIntro content={about} />
       {founder && <SushmasMessage founder={founder} />}
       {youthInstructors.length > 0 && (
         <YouthInstructors instructors={youthInstructors} />

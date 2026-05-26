@@ -12,9 +12,9 @@ export interface ClassLevelDetail {
   /** Display name (e.g. "Beginner", "Adavus", etc.). */
   name: string;
   description: string;
-  /** Hero image or video thumbnail. */
+  /** Poster / thumbnail image. */
   image: SanityImage;
-  /** Optional embed URL for a class video. */
+  /** Resolved MP4 URL from Sanity file asset or local fallback path. */
   videoUrl?: string;
   order: number;
 }
@@ -39,7 +39,7 @@ export const classLevelSchema: SanitySchema = {
     { name: "name", title: "Display name", type: "string" },
     { name: "description", title: "Description", type: "text" },
     { name: "image", title: "Image", type: "image" },
-    { name: "videoUrl", title: "Video URL (optional)", type: "url" },
+    { name: "video", title: "Class demo video", type: "file" },
     { name: "order", title: "Display order", type: "number" },
   ],
 };

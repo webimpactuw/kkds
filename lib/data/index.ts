@@ -17,6 +17,7 @@
  */
 import { sanityClient } from "@/lib/sanity/client";
 import {
+  ABOUT_PAGE_QUERY,
   ACTIVE_ANNOUNCEMENT_QUERY,
   CLASS_LEVELS_QUERY,
   CLASS_OFFERINGS_QUERY,
@@ -31,6 +32,7 @@ import {
   UPCOMING_WORKSHOPS_QUERY,
 } from "@/lib/sanity/queries";
 import {
+  fallbackAboutPage,
   fallbackAnnouncement,
   fallbackClassLevels,
   fallbackClassOfferings,
@@ -45,6 +47,7 @@ import {
   fallbackWorkshops,
 } from "./fallbacks";
 
+import type { AboutPage } from "@/sanity/schemas/aboutPage";
 import type { Announcement } from "@/sanity/schemas/announcement";
 import type { ClassLevelDetail } from "@/sanity/schemas/classLevel";
 import type { ClassOffering } from "@/sanity/schemas/classOffering";
@@ -88,6 +91,10 @@ function defaultIsPresent(value: unknown): boolean {
 
 export function getSiteSettings(): Promise<SiteSettings> {
   return withFallback<SiteSettings>(SITE_SETTINGS_QUERY, fallbackSiteSettings);
+}
+
+export function getAboutPage(): Promise<AboutPage> {
+  return withFallback<AboutPage>(ABOUT_PAGE_QUERY, fallbackAboutPage);
 }
 
 export function getInstructors(): Promise<Instructor[]> {

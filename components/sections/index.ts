@@ -1,3 +1,4 @@
+export { AboutIntro } from "./AboutIntro";
 export { ClassLevelsSection } from "./ClassLevelsSection";
 export { ClassesOffered } from "./ClassesOffered";
 export { ContactSection } from "./ContactSection";

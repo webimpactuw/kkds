@@ -39,8 +39,12 @@ export function Navbar() {
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(`${href}/`);
 
+  const isStudio = pathname?.startsWith("/studio");
+
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header
+      className={cn("z-50 w-full", isStudio ? "relative" : "sticky top-0")}
+    >
       <div className="bg-maroon shadow-[0_2px_18px_rgba(0,0,0,0.18)]">
         <div className="mx-auto flex h-[86px] max-w-[1440px] items-center justify-between px-6 md:h-[86px] md:px-12 lg:px-[64px]">
           <Logo />

@@ -13,7 +13,7 @@ import {
 export const metadata = {
   title: "Classes",
   description:
-    "Weekly Kuchipudi class schedule, school breaks, and class levels at Kalamandapam — Sammamish's home for classical Indian dance.",
+    "Weekly Kuchipudi class schedule, school breaks, and class levels at Kalamandapam — Redmond's home for classical Indian dance.",
 };
 
 export default async function ClassesPage() {

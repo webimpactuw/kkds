@@ -43,3 +43,29 @@ export interface SanityImage {
   /** Optional alt text. */
   alt?: string;
 }
+
+/**
+ * Reusable image field matching Sanity image best practices:
+ * hotspot cropping + editor-provided alt text on the image object (not the asset).
+ */
+export function sanityImageField(
+  name: string,
+  title: string,
+  options?: { description?: string },
+): SanitySchemaField {
+  return {
+    name,
+    title,
+    type: "image",
+    description: options?.description,
+    options: { hotspot: true },
+    fields: [
+      {
+        name: "alt",
+        title: "Alternative text",
+        type: "string",
+        description: "Brief description for screen readers and SEO.",
+      },
+    ],
+  };
+}

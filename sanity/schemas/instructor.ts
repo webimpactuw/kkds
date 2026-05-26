@@ -9,11 +9,11 @@ export interface Instructor {
   role: InstructorRole;
   /** Short title shown under the name (e.g. "Founder & Instructor"). */
   title?: string;
+  /** Founder: multi-paragraph message. Assistants: full bio (stored in CMS). */
   bio: string;
   photo: SanityImage;
   /** Order within the instructor's role group (lower = earlier). */
   order: number;
-  specialties?: string[];
 }
 
 export const instructorSchema: SanitySchema = {
@@ -35,14 +35,8 @@ export const instructorSchema: SanitySchema = {
       },
     },
     { name: "title", title: "Title (e.g. Founder & Instructor)", type: "string" },
-    { name: "bio", title: "Biography", type: "text" },
+    { name: "bio", title: "Bio", type: "text" },
     { name: "photo", title: "Portrait", type: "image" },
-    {
-      name: "specialties",
-      title: "Specialties",
-      type: "array",
-      of: [{ type: "string" }],
-    },
     { name: "order", title: "Display order", type: "number" },
   ],
   preview: { select: { title: "name", subtitle: "role", media: "photo" } },

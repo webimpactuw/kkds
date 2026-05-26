@@ -1,4 +1,4 @@
-import type { SanityImage, SanitySchema } from "./_shared";
+import { sanityImageField, type SanityImage, type SanitySchema } from "./_shared";
 
 export type GalleryCategory =
   | "performance"
@@ -24,7 +24,7 @@ export const galleryImageSchema: SanitySchema = {
   title: "Gallery Image",
   type: "document",
   fields: [
-    { name: "image", title: "Image", type: "image" },
+    sanityImageField("image", "Image"),
     { name: "caption", title: "Caption", type: "text" },
     {
       name: "category",
@@ -44,4 +44,7 @@ export const galleryImageSchema: SanitySchema = {
     { name: "order", title: "Display order", type: "number" },
     { name: "feature", title: "Feature image?", type: "boolean" },
   ],
+  preview: {
+    select: { title: "caption", subtitle: "category", media: "image" },
+  },
 };

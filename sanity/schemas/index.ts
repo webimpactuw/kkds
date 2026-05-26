@@ -4,6 +4,7 @@
  * When Sanity Studio is wired up, the studio config will import this array
  * and pass it to `defineConfig({ schema: { types: schemaTypes } })`.
  */
+import { aboutPageSchema } from "./aboutPage";
 import { announcementSchema } from "./announcement";
 import { classLevelSchema } from "./classLevel";
 import { classOfferingSchema } from "./classOffering";
@@ -19,6 +20,7 @@ import { workshopSchema } from "./workshop";
 
 export const schemaTypes = [
   announcementSchema,
+  aboutPageSchema,
   classLevelSchema,
   classOfferingSchema,
   classScheduleSchema,
@@ -34,6 +36,7 @@ export const schemaTypes = [
 
 /* Re-export individual schemas and types for direct consumption. */
 export * from "./_shared";
+export * from "./aboutPage";
 export * from "./announcement";
 export * from "./classLevel";
 export * from "./classOffering";

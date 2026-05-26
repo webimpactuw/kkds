@@ -2,6 +2,7 @@
  * Barrel for fallback content. Each fetcher in `lib/data/*.ts` imports its
  * fallback from here and falls back to it when Sanity returns no data.
  */
+export { fallbackAboutPage } from "./aboutPage";
 export { fallbackAnnouncement } from "./announcements";
 export { fallbackClassLevels } from "./classLevels";
 export { fallbackClassOfferings } from "./classOfferings";

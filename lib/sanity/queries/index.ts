@@ -1,19 +1,30 @@
 /**
- * GROQ queries for every content type. Written ahead of time; not yet called
- * (the Sanity client stub returns null, which triggers fetcher fallbacks).
+ * GROQ queries for every content type.
  *
- * Each query intentionally matches the runtime TS type defined in
- * `sanity/schemas/<type>.ts` so swapping in real Sanity data requires no
- * downstream component changes.
+ * Each query matches the runtime TS type in `sanity/schemas/<type>.ts`.
+ * Image fields use `lib/sanity/projections.ts` for consistent `{ url, alt }`.
  */
+import { imageProjection } from "../projections";
 
 export const SITE_SETTINGS_QUERY = `
-  *[_type == "siteSettings"][0]{
+  *[_type == "siteSettings" && _id == "siteSettings"][0]{
     studioName,
-    hero{ wordmark, subhead, subtitle, "image": image.asset->{ "url": url, "alt": altText } },
+    hero{
+      wordmark,
+      subhead,
+      subtitle,
+      ${imageProjection("image")}
+    },
     mission,
     contact,
     social
+  }
+`;
+
+export const ABOUT_PAGE_QUERY = `
+  *[_type == "aboutPage" && _id == "aboutPage"][0]{
+    heading,
+    paragraphs
   }
 `;
 
@@ -24,8 +35,7 @@ export const INSTRUCTORS_QUERY = `
     role,
     title,
     bio,
-    "photo": photo.asset->{ "url": url, "alt": altText },
-    specialties,
+    ${imageProjection("photo")},
     order
   }
 `;
@@ -36,13 +46,18 @@ export const CLASS_OFFERINGS_QUERY = `
     title,
     level,
     description,
-    "image": image.asset->{ "url": url, "alt": altText },
+    ${imageProjection("image")},
     order
   }
 `;
 
 export const CLASS_SCHEDULE_QUERY = `
-  *[_type == "classSchedule"][0]{ title, startDateLabel, endDateLabel, days }
+  *[_type == "classSchedule" && _id == "classSchedule"][0]{
+    title,
+    startDateLabel,
+    endDateLabel,
+    days
+  }
 `;
 
 export const SCHEDULE_BREAKS_QUERY = `
@@ -60,8 +75,8 @@ export const CLASS_LEVELS_QUERY = `
     level,
     name,
     description,
-    "image": image.asset->{ "url": url, "alt": altText },
-    videoUrl,
+    ${imageProjection("image")},
+    "videoUrl": video.asset->url,
     order
   }
 `;
@@ -74,7 +89,7 @@ export const UPCOMING_EVENTS_QUERY = `
     dateLabel,
     location,
     description,
-    "image": image.asset->{ "url": url, "alt": altText },
+    ${imageProjection("image")},
     ticketsUrl,
     upcoming,
     order
@@ -88,7 +103,7 @@ export const UPCOMING_WORKSHOPS_QUERY = `
     "date": date,
     dateLabel,
     description,
-    "image": image.asset->{ "url": url, "alt": altText },
+    ${imageProjection("image")},
     signUpUrl,
     upcoming,
     order
@@ -98,7 +113,7 @@ export const UPCOMING_WORKSHOPS_QUERY = `
 export const GALLERY_QUERY = `
   *[_type == "galleryImage"] | order(order asc){
     "id": _id,
-    "image": image.asset->{ "url": url, "alt": altText },
+    ${imageProjection("image")},
     caption,
     category,
     credit,

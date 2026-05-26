@@ -7,18 +7,26 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "studio": "sanity dev",
+    "schema:deploy": "npx -y node@22 ./node_modules/.bin/sanity schema deploy",
+    "seed": "tsx scripts/seed-sanity.ts"
   },
   "dependencies": {
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^1.2.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.0",
     "next": "^15.0.0",
+    "next-sanity": "^9.12.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sanity": "^3.99.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
+    "@sanity/icons": "^3.7.4",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
@@ -27,6 +35,7 @@
     "eslint-config-next": "^15.0.0",
     "postcss": "^8.4.0",
     "tailwindcss": "^4.0.0",
+    "tsx": "^4.22.3",
     "typescript": "^5.6.0"
   }
 }

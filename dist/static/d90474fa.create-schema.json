@@ -1,0 +1,934 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "studioName",
+        "type": "string",
+        "title": "Studio name"
+      },
+      {
+        "fields": [
+          {
+            "name": "wordmark",
+            "type": "string",
+            "title": "Hero wordmark"
+          },
+          {
+            "name": "subhead",
+            "type": "string",
+            "title": "Hero subheading"
+          },
+          {
+            "name": "subtitle",
+            "type": "text",
+            "title": "Hero subtitle copy"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "description": "Brief description for screen readers and SEO.",
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative text"
+              }
+            ],
+            "name": "image",
+            "type": "image",
+            "title": "Hero image"
+          }
+        ],
+        "name": "hero",
+        "type": "object"
+      },
+      {
+        "description": "Short summary shown on the home page.",
+        "name": "mission",
+        "type": "text",
+        "title": "Mission statement (home page banner)"
+      },
+      {
+        "fields": [
+          {
+            "name": "email",
+            "type": "string",
+            "title": "Studio email"
+          },
+          {
+            "name": "phone",
+            "type": "string"
+          },
+          {
+            "name": "address",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "mapUrl",
+            "type": "url",
+            "title": "Google Maps URL"
+          },
+          {
+            "name": "hours",
+            "type": "text",
+            "title": "Studio hours (optional)"
+          }
+        ],
+        "name": "contact",
+        "type": "object",
+        "title": "Contact info"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "facebookUrl",
+            "type": "url",
+            "title": "Facebook URL"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "instagramUrl",
+            "type": "url",
+            "title": "Instagram URL"
+          }
+        ],
+        "name": "social",
+        "type": "object",
+        "title": "Social links"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "heading",
+        "type": "string",
+        "title": "Section heading"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Each item is one paragraph on the About page intro.",
+        "of": [
+          {
+            "type": "text"
+          }
+        ],
+        "name": "paragraphs",
+        "type": "array",
+        "title": "Intro paragraphs"
+      }
+    ],
+    "name": "aboutPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Founder / Lead",
+              "value": "founder"
+            },
+            {
+              "title": "Youth Instructor",
+              "value": "youth"
+            },
+            {
+              "title": "Teaching Assistant",
+              "value": "assistant"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "founder",
+                  "youth",
+                  "assistant"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Title (e.g. Founder & Instructor)"
+      },
+      {
+        "description": "Founder message can be multiple paragraphs. Assistant bios are stored for CMS reference.",
+        "name": "bio",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "warning",
+                "message": "Alt text improves accessibility"
+              }
+            ],
+            "description": "Brief description for screen readers and SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "photo",
+        "type": "image",
+        "title": "Portrait"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "instructor",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Beginner",
+              "value": "beginner"
+            },
+            {
+              "title": "Intermediate",
+              "value": "intermediate"
+            },
+            {
+              "title": "Advanced",
+              "value": "advanced"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "beginner",
+                  "intermediate",
+                  "advanced"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "level",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Display name"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Poster shown before a class-level video plays. Videos are managed in code, not Sanity.",
+        "fields": [
+          {
+            "description": "Brief description for screen readers and SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "image",
+        "type": "image",
+        "title": "Thumbnail / poster image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "classLevel",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Beginner",
+              "value": "beginner"
+            },
+            {
+              "title": "Intermediate",
+              "value": "intermediate"
+            },
+            {
+              "title": "Advanced",
+              "value": "advanced"
+            }
+          ]
+        },
+        "name": "level",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Brief description for screen readers and SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "classOffering",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "startDateLabel",
+        "type": "string",
+        "title": "First Day of Class label"
+      },
+      {
+        "name": "endDateLabel",
+        "type": "string",
+        "title": "Last Day of Class label"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday",
+                    "sunday"
+                  ]
+                },
+                "name": "day",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "level",
+                        "type": "string",
+                        "title": "Level label"
+                      },
+                      {
+                        "name": "startTime",
+                        "type": "string",
+                        "title": "Start time"
+                      },
+                      {
+                        "name": "endTime",
+                        "type": "string",
+                        "title": "End time"
+                      },
+                      {
+                        "name": "tbd",
+                        "type": "boolean",
+                        "title": "TBD row?"
+                      },
+                      {
+                        "name": "tbdLabel",
+                        "type": "string",
+                        "title": "TBD label"
+                      }
+                    ],
+                    "type": "object",
+                    "name": "classSlot"
+                  }
+                ],
+                "name": "slots",
+                "type": "array",
+                "title": "Class slots"
+              }
+            ],
+            "type": "object",
+            "name": "daySchedule"
+          }
+        ],
+        "name": "days",
+        "type": "array",
+        "title": "Day schedules"
+      }
+    ],
+    "name": "classSchedule",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "dateRange",
+        "type": "string",
+        "title": "Date range"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "scheduleBreak",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "title": "Date (ISO)"
+      },
+      {
+        "name": "dateLabel",
+        "type": "string",
+        "title": "Date label (display)"
+      },
+      {
+        "name": "location",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Brief description for screen readers and SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "ticketsUrl",
+        "type": "url",
+        "title": "Buy Tickets URL"
+      },
+      {
+        "initialValue": true,
+        "name": "upcoming",
+        "type": "boolean",
+        "title": "Upcoming?"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "event",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "title": "Date (ISO)"
+      },
+      {
+        "name": "dateLabel",
+        "type": "string",
+        "title": "Date label (display)"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Brief description for screen readers and SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "signUpUrl",
+        "type": "url",
+        "title": "Sign Up URL"
+      },
+      {
+        "initialValue": true,
+        "name": "upcoming",
+        "type": "boolean",
+        "title": "Upcoming?"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "workshop",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Brief description for screen readers and SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "name": "caption",
+        "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Performance",
+              "value": "performance"
+            },
+            {
+              "title": "Class",
+              "value": "class"
+            },
+            {
+              "title": "Event",
+              "value": "event"
+            },
+            {
+              "title": "Studio",
+              "value": "studio"
+            },
+            {
+              "title": "Other",
+              "value": "other"
+            }
+          ]
+        },
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "credit",
+        "type": "string"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      },
+      {
+        "name": "feature",
+        "type": "boolean",
+        "title": "Feature image?"
+      }
+    ],
+    "name": "galleryImage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "question",
+        "type": "string"
+      },
+      {
+        "name": "answer",
+        "type": "text"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "faq",
+    "type": "document",
+    "title": "FAQ"
+  },
+  {
+    "fields": [
+      {
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "name": "author",
+        "type": "string"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "title": "Class"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display order"
+      }
+    ],
+    "name": "testimonial",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "body",
+        "type": "text"
+      },
+      {
+        "name": "date",
+        "type": "datetime"
+      },
+      {
+        "initialValue": false,
+        "name": "active",
+        "type": "boolean",
+        "title": "Active?"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "ctaUrl",
+        "type": "url",
+        "title": "CTA URL"
+      },
+      {
+        "name": "ctaLabel",
+        "type": "string",
+        "title": "CTA label"
+      }
+    ],
+    "name": "announcement",
+    "type": "document"
+  }
+]
