@@ -85,6 +85,20 @@ function defaultIsPresent(value: unknown): boolean {
   return true;
 }
 
+/**
+ * For list content where an empty Sanity result is valid (e.g. no workshops yet).
+ * Falls back only when Sanity is unavailable (null) or the fetch throws.
+ */
+async function withListFallback<T>(query: string, fallback: T[]): Promise<T[]> {
+  try {
+    const data = await sanityClient.fetch<T[]>(query);
+    if (data === null || data === undefined) return fallback;
+    return data;
+  } catch {
+    return fallback;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Public fetchers                                                            */
 /* -------------------------------------------------------------------------- */
@@ -127,11 +141,11 @@ export function getClassLevels(): Promise<ClassLevelDetail[]> {
 }
 
 export function getUpcomingEvents(): Promise<KkdsEvent[]> {
-  return withFallback<KkdsEvent[]>(UPCOMING_EVENTS_QUERY, fallbackEvents);
+  return withListFallback(UPCOMING_EVENTS_QUERY, fallbackEvents);
 }
 
 export function getUpcomingWorkshops(): Promise<Workshop[]> {
-  return withFallback<Workshop[]>(UPCOMING_WORKSHOPS_QUERY, fallbackWorkshops);
+  return withListFallback(UPCOMING_WORKSHOPS_QUERY, fallbackWorkshops);
 }
 
 export function getGalleryImages(): Promise<GalleryImageEntry[]> {
