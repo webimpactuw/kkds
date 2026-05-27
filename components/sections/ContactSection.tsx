@@ -1,5 +1,6 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +8,18 @@ import { Input } from "@/components/ui/Input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Textarea } from "@/components/ui/Textarea";
 import type { SiteSettings } from "@/sanity/schemas/siteSettings";
+
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const EMAILJS_TEMPLATE_ID2 = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID2;
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+const isEmailJsConfigured = Boolean(
+  EMAILJS_SERVICE_ID &&
+    EMAILJS_TEMPLATE_ID &&
+    EMAILJS_TEMPLATE_ID2 &&
+    EMAILJS_PUBLIC_KEY,
+);
 
 interface ContactSectionProps {
   /**
@@ -24,24 +37,28 @@ interface ContactSectionProps {
 }
 
 interface FormState {
-  name: string;
+  from_name: string;
   email: string;
   message: string;
 }
 
-const INITIAL_STATE: FormState = { name: "", email: "", message: "" };
+const INITIAL_STATE: FormState = { from_name: "", email: "", message: "" };
+
+function openMailtoFallback(form: FormState, contactEmail: string) {
+  const subject = encodeURIComponent(
+    `Inquiry from ${form.from_name || "the Kalamandapam website"}`,
+  );
+  const body = encodeURIComponent(
+    `Name: ${form.from_name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`,
+  );
+  window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+}
 
 /**
  * "Get In Touch" form + map. Used on the Home page and (richer) on /contact.
  *
- * Form behavior:
- *   • Today: opens the user's mail client via `mailto:` pre-filled with the
- *     Name / Email / Message fields.
- *   • Tomorrow: swap the `handleSubmit` body for an EmailJS call.
- *
- * TODO(emailjs): wire `emailjs.send(serviceId, templateId, formState)` here
- * once the EmailJS service & template are provisioned. Keep the mailto path
- * as a graceful fallback (e.g. on send failure).
+ * Submits via EmailJS when configured (client auto-reply + studio notification).
+ * Falls back to a pre-filled `mailto:` link when EmailJS is unavailable or fails.
  */
 export function ContactSection({
   settings,
@@ -49,19 +66,48 @@ export function ContactSection({
   heading = "Get In Touch",
 }: ContactSectionProps) {
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    /* Build a structured mailto link. The user's mail client opens with the
-     * subject and body pre-filled — they tap Send to complete the message. */
-    const subject = encodeURIComponent(
-      `Inquiry from ${form.name || "the Kalamandapam website"}`,
-    );
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`,
-    );
-    window.location.href = `mailto:${settings.contact.email}?subject=${subject}&body=${body}`;
+    if (!isEmailJsConfigured) {
+      openMailtoFallback(form, settings.contact.email);
+      return;
+    }
+
+    setLoading(true);
+    setSuccess(false);
+    setError(false);
+
+    try {
+      const formElement = e.currentTarget;
+
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID!,
+        EMAILJS_TEMPLATE_ID!,
+        formElement,
+        EMAILJS_PUBLIC_KEY!,
+      );
+
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID!,
+        EMAILJS_TEMPLATE_ID2!,
+        formElement,
+        EMAILJS_PUBLIC_KEY!,
+      );
+
+      setSuccess(true);
+      setForm(INITIAL_STATE);
+      formElement.reset();
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,11 +135,13 @@ export function ContactSection({
             >
               <Input
                 label="Name"
-                name="name"
+                name="from_name"
                 type="text"
                 placeholder="Name"
-                value={form.name}
-                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                value={form.from_name}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, from_name: e.target.value }))
+                }
                 required
                 autoComplete="name"
               />
@@ -117,9 +165,32 @@ export function ContactSection({
                 }
                 required
               />
-              <Button type="submit" variant="send">
-                Send
+              <Button type="submit" variant="send" disabled={loading}>
+                {loading ? "Sending..." : "Send"}
               </Button>
+
+              {success && (
+                <p className="font-rambla text-body font-bold text-green-700">
+                  Message sent successfully!
+                </p>
+              )}
+
+              {error && (
+                <div className="font-rambla text-body flex flex-col gap-2">
+                  <p className="font-bold text-red-700">
+                    Something went wrong. Please try again.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMailtoFallback(form, settings.contact.email)
+                    }
+                    className="text-maroon w-fit underline decoration-maroon/40 underline-offset-4 transition hover:decoration-maroon"
+                  >
+                    Send via your email app instead
+                  </button>
+                </div>
+              )}
             </form>
           </motion.div>
 
