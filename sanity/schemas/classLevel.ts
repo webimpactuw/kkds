@@ -14,8 +14,10 @@ export interface ClassLevelDetail {
   description: string;
   /** Poster / thumbnail image. */
   image: SanityImage;
-  /** Resolved MP4 URL from Sanity file asset or local fallback path. */
+  /** Resolved video URL from Sanity file asset or local fallback path. */
   videoUrl?: string;
+  /** MIME type from Sanity asset (e.g. video/mp4). */
+  videoMimeType?: string;
   order: number;
 }
 

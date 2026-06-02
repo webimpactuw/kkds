@@ -77,6 +77,7 @@ export const CLASS_LEVELS_QUERY = `
     description,
     ${imageProjection("image")},
     "videoUrl": video.asset->url,
+    "videoMimeType": video.asset->mimeType,
     order
   }
 `;

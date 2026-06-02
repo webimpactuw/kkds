@@ -19,7 +19,6 @@ import { sanityClient } from "@/lib/sanity/client";
 import {
   ABOUT_PAGE_QUERY,
   ACTIVE_ANNOUNCEMENT_QUERY,
-  CLASS_LEVELS_QUERY,
   CLASS_OFFERINGS_QUERY,
   CLASS_SCHEDULE_QUERY,
   FAQS_QUERY,
@@ -34,7 +33,6 @@ import {
 import {
   fallbackAboutPage,
   fallbackAnnouncement,
-  fallbackClassLevels,
   fallbackClassOfferings,
   fallbackClassSchedule,
   fallbackEvents,
@@ -49,7 +47,6 @@ import {
 
 import type { AboutPage } from "@/sanity/schemas/aboutPage";
 import type { Announcement } from "@/sanity/schemas/announcement";
-import type { ClassLevelDetail } from "@/sanity/schemas/classLevel";
 import type { ClassOffering } from "@/sanity/schemas/classOffering";
 import type { ClassSchedule } from "@/sanity/schemas/classSchedule";
 import type { KkdsEvent } from "@/sanity/schemas/event";
@@ -133,12 +130,7 @@ export function getScheduleBreaks(): Promise<ScheduleBreak[]> {
   );
 }
 
-export function getClassLevels(): Promise<ClassLevelDetail[]> {
-  return withFallback<ClassLevelDetail[]>(
-    CLASS_LEVELS_QUERY,
-    fallbackClassLevels,
-  );
-}
+export { getClassLevels } from "./classLevels";
 
 export function getUpcomingEvents(): Promise<KkdsEvent[]> {
   return withListFallback(UPCOMING_EVENTS_QUERY, fallbackEvents);

@@ -80,6 +80,7 @@ export const V1_CLASS_LEVELS: ClassLevelDetail[] = [
       url: "/images/classes/level-beginner.png",
       alt: "Advanced Kuchipudi class",
     },
+    videoUrl: "/videos/class-levels/advanced.mp4",
     order: 2,
   },
 ];

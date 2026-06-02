@@ -8,6 +8,7 @@ interface ClassLevelVideoProps {
   src: string;
   poster: string;
   title: string;
+  mimeType?: string;
   className?: string;
 }
 
@@ -26,6 +27,7 @@ export function ClassLevelVideo({
   src,
   poster,
   title,
+  mimeType = "video/mp4",
   className,
 }: ClassLevelVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -123,7 +125,7 @@ export function ClassLevelVideo({
           clearHideTimer();
         }}
       >
-        <source src={src} type="video/mp4" />
+        <source src={src} type={mimeType} />
       </video>
 
       {/* Idle poster overlay (before first play) */}

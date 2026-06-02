@@ -34,6 +34,7 @@ export function ClassLevelCard({ level, index = 0 }: ClassLevelCardProps) {
             src={level.videoUrl}
             poster={level.image.url}
             title={level.name}
+            mimeType={level.videoMimeType}
             className="rounded-[10px]"
           />
         ) : (
