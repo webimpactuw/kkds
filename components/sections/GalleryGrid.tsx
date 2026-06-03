@@ -18,6 +18,18 @@ interface GalleryGridProps {
  * Each tile uses a Figma-spec `aspect-[615/385]`.
  */
 export function GalleryGrid({ images }: GalleryGridProps) {
+  if (images.length === 0) {
+    return (
+      <section className="bg-cream w-full pb-16 md:pb-24 lg:pb-[120px]">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12 lg:px-[100px]">
+          <p className="font-rambla text-body text-ink/70 text-center">
+            Gallery photos will appear here once they are published in the CMS.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-cream w-full pb-16 md:pb-24 lg:pb-[120px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12 lg:px-[100px]">

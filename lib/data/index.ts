@@ -22,7 +22,6 @@ import {
   CLASS_OFFERINGS_QUERY,
   CLASS_SCHEDULE_QUERY,
   FAQS_QUERY,
-  GALLERY_QUERY,
   INSTRUCTORS_QUERY,
   SCHEDULE_BREAKS_QUERY,
   SITE_SETTINGS_QUERY,
@@ -37,7 +36,6 @@ import {
   fallbackClassSchedule,
   fallbackEvents,
   fallbackFaqs,
-  fallbackGalleryImages,
   fallbackInstructors,
   fallbackScheduleBreaks,
   fallbackSiteSettings,
@@ -51,7 +49,6 @@ import type { ClassOffering } from "@/sanity/schemas/classOffering";
 import type { ClassSchedule } from "@/sanity/schemas/classSchedule";
 import type { KkdsEvent } from "@/sanity/schemas/event";
 import type { Faq } from "@/sanity/schemas/faq";
-import type { GalleryImageEntry } from "@/sanity/schemas/galleryImage";
 import type { Instructor } from "@/sanity/schemas/instructor";
 import type { ScheduleBreak } from "@/sanity/schemas/scheduleBreak";
 import type { SiteSettings } from "@/sanity/schemas/siteSettings";
@@ -140,9 +137,7 @@ export function getUpcomingWorkshops(): Promise<Workshop[]> {
   return withListFallback(UPCOMING_WORKSHOPS_QUERY, fallbackWorkshops);
 }
 
-export function getGalleryImages(): Promise<GalleryImageEntry[]> {
-  return withFallback<GalleryImageEntry[]>(GALLERY_QUERY, fallbackGalleryImages);
-}
+export { getGalleryImages } from "./gallery";
 
 export function getFaqs(): Promise<Faq[]> {
   return withFallback<Faq[]>(FAQS_QUERY, fallbackFaqs);
