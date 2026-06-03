@@ -1,6 +1,8 @@
 import { PageBanner } from "@/components/ui/PageBanner";
 import { EventsList, WorkshopsList } from "@/components/sections";
 import { getUpcomingEvents, getUpcomingWorkshops } from "@/lib/data";
+/** Re-fetch Sanity every 60s — see lib/sanity/cache.ts */
+export const revalidate = 60;
 
 export const metadata = {
   title: "Events & Workshops",

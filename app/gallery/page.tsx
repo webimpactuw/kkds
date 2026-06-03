@@ -1,6 +1,8 @@
 import { PageBanner } from "@/components/ui/PageBanner";
 import { GalleryGrid } from "@/components/sections";
 import { getGalleryImages } from "@/lib/data";
+/** Re-fetch Sanity every 60s — see lib/sanity/cache.ts */
+export const revalidate = 60;
 
 export const metadata = {
   title: "Gallery",

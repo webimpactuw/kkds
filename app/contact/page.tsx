@@ -1,6 +1,8 @@
 import { PageBanner } from "@/components/ui/PageBanner";
 import { ContactSection } from "@/components/sections";
 import { getSiteSettings } from "@/lib/data";
+/** Re-fetch Sanity every 60s — see lib/sanity/cache.ts */
+export const revalidate = 60;
 
 export const metadata = {
   title: "Contact",

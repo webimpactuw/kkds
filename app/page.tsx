@@ -12,6 +12,8 @@ import {
   getSiteSettings,
   getUpcomingEvents,
 } from "@/lib/data";
+/** Re-fetch Sanity every 60s — see lib/sanity/cache.ts */
+export const revalidate = 60;
 
 export default async function HomePage() {
   const [settings, offerings, events, faqs] = await Promise.all([

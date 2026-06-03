@@ -6,6 +6,8 @@ import {
   YouthInstructors,
 } from "@/components/sections";
 import { getAboutPage, getInstructors } from "@/lib/data";
+/** Re-fetch Sanity every 60s — see lib/sanity/cache.ts */
+export const revalidate = 60;
 
 export const metadata = {
   title: "About Us",

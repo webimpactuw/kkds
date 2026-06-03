@@ -18,6 +18,7 @@ export const sanityClient: Pick<SanityClient, "fetch"> = isSanityConfigured
       projectId: sanityProjectId!,
       dataset: sanityDataset,
       apiVersion: sanityApiVersion,
-      useCdn: process.env.NODE_ENV === "production",
+      // API (not CDN) so Vercel/ISR always sees freshly published CMS content.
+      useCdn: false,
     })
   : stubClient;
